@@ -11,4 +11,6 @@ public interface MovieSearchRepository {
   Page<MovieSearch> findAll();
 
   List<BucketByRepGenreNm> aggsByRepGenreNmNative();
+
+  void searchMovieSearch();
 }

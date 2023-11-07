@@ -1,6 +1,6 @@
 package com.seya330.practiceElasticSearch.service;
 
-import com.seya330.practiceElasticSearch.repository.MovieSearchRepositoryImpl;
+import com.seya330.practiceElasticSearch.repository.MovieSearchRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class SearchMovieSearchService {
 
-  private final MovieSearchRepositoryImpl movieSearchRepositoryImpl;
+  private final MovieSearchRepository movieSearchRepository;
 
-
+  public void searchMovieSearch() {
+    movieSearchRepository.searchMovieSearch();
+  }
 }

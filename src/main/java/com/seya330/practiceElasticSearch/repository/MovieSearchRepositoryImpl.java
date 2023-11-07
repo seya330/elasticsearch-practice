@@ -45,4 +45,16 @@ public class MovieSearchRepositoryImpl implements MovieSearchRepository {
                     .build()
             ).toList();
     }
+
+    public void searchMovieSearch() {
+        final NativeQuery nativeQuery = new NativeQueryBuilder()
+                .withFilter(e -> e.bool(
+                        bool -> bool.mustNot(mustNot -> mustNot.term(term -> term.field("repNationNm").value("한국")))
+                ))
+                .withQuery(
+                        query -> query.term(term -> term.field("movieNm").value("행복"))
+                ).build();
+        final SearchHits<MovieSearch> search = operations.search(nativeQuery, MovieSearch.class);
+        System.out.println(1);
+    }
 }

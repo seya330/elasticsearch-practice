@@ -4,6 +4,7 @@ import com.seya330.practiceElasticSearch.document.MovieSearch;
 import com.seya330.practiceElasticSearch.result.BucketByRepGenreNm;
 import com.seya330.practiceElasticSearch.service.AggregationMovieSearchService;
 import com.seya330.practiceElasticSearch.service.GetMovieSearchService;
+import com.seya330.practiceElasticSearch.service.SearchMovieSearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,8 @@ public class MovieController {
 
   private final GetMovieSearchService getMovieSearchService;
 
+  private final SearchMovieSearchService searchMovieSearchService;
+
   private final AggregationMovieSearchService aggregationMovieSearchService;
 
   @GetMapping
@@ -30,5 +33,11 @@ public class MovieController {
   @GetMapping("/aggregations/native")
   public ResponseEntity<List<BucketByRepGenreNm>> getAggregationByNative() {
     return ResponseEntity.ok(aggregationMovieSearchService.getQtyByRepGenreNm());
+  }
+
+  @GetMapping("/search")
+  public ResponseEntity<Void> searchMovieSearch() {
+    searchMovieSearchService.searchMovieSearch();
+    return ResponseEntity.noContent().build();
   }
 }
