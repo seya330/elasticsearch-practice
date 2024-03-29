@@ -9,6 +9,7 @@ import org.springframework.data.elasticsearch.core.index.AliasActions;
 import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collections;
 import java.util.Set;
 
 @Repository
@@ -40,8 +41,13 @@ public class BaseEsRepositoryImpl<T> implements BaseEsRepository<T> {
 
     @Override
     public Set<String> findIndexNamesByAlias(IndexCoordinates aliasNameWrapper) {
+        //alias를 indexName을 통해 가지고 온다.
         final IndexOperations indexOperations = operations.indexOps(aliasNameWrapper);
-        return indexOperations.getAliasesForIndex(aliasNameWrapper.getIndexName()).keySet();
+        if (operations.indexOps(aliasNameWrapper).exists()) {
+            return indexOperations.getAliasesForIndex(aliasNameWrapper.getIndexName()).keySet();
+        } else {
+            return Collections.emptySet();
+        }
     }
 
     @Override
